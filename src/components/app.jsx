@@ -16,7 +16,7 @@ const { SubMenu } = Menu;
 class App extends Component {
 	state = {
 		collapsed: lscache.get('collapsed') || false,
-		selectedKey: window.location.pathname,
+		selectedKey: typeof window !== 'undefined' ? window.location.pathname : '',
 		openKey: lscache.get('openKey') || ''
 	}
 

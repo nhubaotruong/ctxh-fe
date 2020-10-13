@@ -91,6 +91,7 @@ const Hanghoa = () => {
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [currentModalData, setCurrentModalData] = useState(null);
     const [variantsData, setVariantsData] = useState(null);
+    const [variantsColumn, setVariantsColumn] = useState([]);
 
     const [form] = Form.useForm();
 
@@ -158,6 +159,47 @@ const Hanghoa = () => {
             }
         }
         setVariantsData(variants);
+        if (color.length > 0) {
+            setVariantsColumn(prevState => {
+                return [
+                    ...prevState,
+                    {
+
+                        title: <Text ellipsis={true}>Màu</Text>,
+                        dataIndex: 'color',
+                        render: (text, record, index) => <Text>{findName(record.color, colorList)}</Text>,
+                        width: 'auto'
+
+                    }
+                ]
+            });
+        }
+        if (size.length > 0) {
+            setVariantsColumn(prevState => {
+                return [
+                    ...prevState,
+                    {
+                        title: <Text ellipsis={true}>Size</Text>,
+                        dataIndex: 'size',
+                        render: (text, record, index) => <Text>{findName(record.size, sizeList)}</Text>,
+                        width: 'auto'
+                    }
+                ]
+            });
+        }
+        if (sexes.length > 0) {
+            setVariantsColumn(prevState => {
+                return [
+                    ...prevState,
+                    {
+                        title: <Text ellipsis={true}>Nam hay nữ</Text>,
+                        dataIndex: 'sexes',
+                        render: (text, record, index) => <Text>{record.sexes}</Text>,
+                        width: 'auto'
+                    }
+                ]
+            });
+        }
     }
 
     const findName = (_id, list) => {
@@ -171,43 +213,43 @@ const Hanghoa = () => {
         });
     }
 
-    const variantsColumn = [
-        {
-            title: <Text ellipsis={true}>#</Text>,
-            dataIndex: 'index',
-            render: (text, record, index) => <Text>{index + 1}</Text>,
-            width: '2%',
-            align: 'center'
-        },
-        {
-            title: <Text ellipsis={true}>Màu</Text>,
-            dataIndex: 'color',
-            render: (text, record, index) => <Text>{findName(record.color, colorList)}</Text>,
-            width: 'auto'
-        },
-        {
-            title: <Text ellipsis={true}>Size</Text>,
-            dataIndex: 'size',
-            render: (text, record, index) => <Text>{findName(record.size, sizeList)}</Text>,
-            width: 'auto'
-        },
-        {
-            title: <Text ellipsis={true}>Nam hay nữ</Text>,
-            dataIndex: 'sexes',
-            render: (text, record, index) => <Text>{record.sexes}</Text>,
-            width: 'auto'
-        },
-        {
-            title: <Text ellipsis={true}>Kích hoạt</Text>,
-            dataIndex: 'active',
-            width: '10%',
-            render: (text, record, index) => (
-                <div style={{ textAlign: 'center' }}>
-                    <Switch defaultChecked={record.active} onChange={(checked, event) => variantsCheckHandler(checked, index)} />
-                </div>
-            )
-        }
-    ]
+    // const variantsColumn = [
+    //     {
+    //         title: <Text ellipsis={true}>#</Text>,
+    //         dataIndex: 'index',
+    //         render: (text, record, index) => <Text>{index + 1}</Text>,
+    //         width: '2%',
+    //         align: 'center'
+    //     },
+    //     {
+    //         title: <Text ellipsis={true}>Màu</Text>,
+    //         dataIndex: 'color',
+    //         render: (text, record, index) => <Text>{findName(record.color, colorList)}</Text>,
+    //         width: 'auto'
+    //     },
+    //     {
+    //         title: <Text ellipsis={true}>Size</Text>,
+    //         dataIndex: 'size',
+    //         render: (text, record, index) => <Text>{findName(record.size, sizeList)}</Text>,
+    //         width: 'auto'
+    //     },
+    //     {
+    //         title: <Text ellipsis={true}>Nam hay nữ</Text>,
+    //         dataIndex: 'sexes',
+    //         render: (text, record, index) => <Text>{record.sexes}</Text>,
+    //         width: 'auto'
+    //     },
+    //     {
+    //         title: <Text ellipsis={true}>Kích hoạt</Text>,
+    //         dataIndex: 'active',
+    //         width: '10%',
+    //         render: (text, record, index) => (
+    //             <div style={{ textAlign: 'center' }}>
+    //                 <Switch defaultChecked={record.active} onChange={(checked, event) => variantsCheckHandler(checked, index)} />
+    //             </div>
+    //         )
+    //     }
+    // ]
 
     return (
         <>
